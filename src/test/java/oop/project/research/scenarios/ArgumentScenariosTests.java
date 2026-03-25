@@ -66,7 +66,10 @@ class ArgumentScenariosTests {
                 """, Map.of("left", 1.0, "right", -2.0)),
             Arguments.of("Negative Decimal (BUG)", """
                 sub 1.0 -2.0
-                """, null)
+                """, null),
+            Arguments.of("Infinity", """
+                sub 1.0 Infinity
+                """, Map.of("left", 1.0, "right", Double.POSITIVE_INFINITY))
         );
     }
 
@@ -83,7 +86,10 @@ class ArgumentScenariosTests {
                 """, Map.of("number", 15)),
             Arguments.of("Zero", """
                 fizzbuzz 0
-                """, null)
+                """, null),
+            Arguments.of("Valid 100", """
+                fizzbuzz 100
+                """, Map.of("number", 100))
         );
     }
 
@@ -121,6 +127,9 @@ class ArgumentScenariosTests {
             Arguments.of("Leap Year", """
                 date 2024-02-29
                 """, Map.of("date", LocalDate.of(2024, 2, 29))),
+            Arguments.of("Invalid date", """
+                date 2024-02-60
+                """, null),
             Arguments.of("Invalid", """
                 date tuesday
                 """, null)
