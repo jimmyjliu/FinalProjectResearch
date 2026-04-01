@@ -8,22 +8,6 @@ import java.time.LocalDate;
 import java.util.Map;
 
 public final class ArgumentScenarios {
-
-    public static Map<String, Object> parse(String command) throws ArgumentParserException {
-        // Recall argparse4j requires a String[] arguments. Space-splitting the
-        // input is sufficient but doesn't support quoted arguments.
-        var split = command.split(" ", 2);
-        var arguments = split.length == 2 ? split[1].split(" ") : new String[] {};
-        return switch (split[0]) {
-            case "add" -> add(arguments);
-            case "sub" -> sub(arguments);
-            case "fizzbuzz" -> fizzbuzz(arguments);
-            case "difficulty" -> difficulty(arguments);
-            case "date" -> date(arguments);
-            default -> throw new AssertionError();
-        };
-    }
-
     public static Map<String, Object> add(String[] arguments) throws ArgumentParserException {
         var parser = ArgumentParsers.newFor("add").build();
         parser.addArgument("left").type(int.class);

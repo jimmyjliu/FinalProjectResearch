@@ -47,8 +47,11 @@ public final class CommandScenarios {
         var parser = ArgumentParsers.newFor("search").build();
         parser.addArgument("term").type(String.class);
         parser.addArgument("--case-insensitive", "-i")
-                .action(Arguments.storeTrue())
+                .type(boolean.class)
+                .nargs("?") // checks for number of arguments
+                .setConst(true)
                 .setDefault(false);
+//                .action(Arguments.storeTrue());
 
         var namespace = parser.parseArgs(arguments);
         var term = namespace.getString("term");
